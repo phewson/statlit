@@ -35,7 +35,6 @@
 \makeatother
 
 
-\usepackage{Sweave}
 \begin{document}
 \mode<article>{\sffamily}
 
@@ -971,7 +970,12 @@ Variability is natural and is also predictable and quantifiable
   \frametitle{Correlation coefficient of 1}
   
   
-\includegraphics{StatisticalLiteracyCourse-rho1}
+<<rho1, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(10, 0, 10)
+y <- x
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = 1", xlab = "x", ylab = "y")
+
+@   
 
 }
 
@@ -980,7 +984,12 @@ Variability is natural and is also predictable and quantifiable
   \frametitle{Correlation coefficient of -1}
   
   
-\includegraphics{StatisticalLiteracyCourse-rhom1}
+<<rhom1, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(10, 0, 10)
+y <- -x + 10
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = -1", xlab = "x", ylab = "y")
+
+@   
 
 }
 
@@ -989,7 +998,12 @@ Variability is natural and is also predictable and quantifiable
   \frametitle{Correlation coefficient of 0}
   
   
-\includegraphics{StatisticalLiteracyCourse-rho0}
+<<rho0, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(10, 0, 10)
+y <- runif(10, 0, 10)
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = 0", xlab = "x", ylab = "y")
+
+@   
 
 }
 
@@ -999,7 +1013,15 @@ Variability is natural and is also predictable and quantifiable
 \frame{
   \frametitle{Higher correlation is (a) Left, (b) Right (c) Neither}  
   
-\includegraphics{StatisticalLiteracyCourse-rhohighlow}
+<<rhohighlow, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(10, 0, 10)
+y <- x
+y2 <- 2*x
+par(mfrow = c(2,2))
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y", ylim = c(0, max(y2)))
+plot(y2~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y", ylim = c(0, max(y2)))
+
+@   
 
 }
 
@@ -1008,7 +1030,19 @@ Variability is natural and is also predictable and quantifiable
   \frametitle{+0.5, -0.8, +0.9, -0.3}
 
 
-\includegraphics{StatisticalLiteracyCourse-rhohighquery}
+<<rhohighquery, fig = TRUE, echo = FALSE, results = hide>>=
+require(MASS)
+par(mfrow = c(2,2))
+X <- mvrnorm(30, mu=c(5,5), Sigma = matrix(c(1, 0.5, 0.5, 1),2,2))
+plot(X[,1] ~ X[,2], pch = 16, col = "red", cex = 1.2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+X <- mvrnorm(30, mu=c(5,5), Sigma = matrix(c(1, -0.8, -0.8, 1),2,2))
+plot(X[,1] ~ X[,2], pch = 16, col = "red", cex = 1.2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+X <- mvrnorm(30, mu=c(5,5), Sigma = matrix(c(1, 0.9, 0.9, 1),2,2))
+plot(X[,1] ~ X[,2], pch = 16, col = "red", cex = 1.2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+X <- mvrnorm(30, mu=c(5,5), Sigma = matrix(c(1, -0.3, -0.3, 1),2,2))
+plot(X[,1] ~ X[,2], pch = 16, col = "red", cex = 1.2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+
+@   
 
 http://istics.net/stat/Correlations/
 
@@ -1026,7 +1060,13 @@ http://istics.net/stat/Correlations/
   \frametitle{Non linear association}
 
  
-\includegraphics{StatisticalLiteracyCourse-nonlinear}
+<<nonlinear, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(20, 0, 10)
+y <- rnorm(20, 5+4*x^3, 2)
+cor(x,y)
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+
+@   
 
 
 }
@@ -1035,7 +1075,13 @@ http://istics.net/stat/Correlations/
   \frametitle{Non linear association}
 
  
-\includegraphics{StatisticalLiteracyCourse-nonlinear2}
+<<nonlinear2, fig = TRUE, echo = FALSE, results = hide>>=
+x <- runif(20, -10, 10)
+y <- rnorm(20,x^2, 2)
+cor(x,y)
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+
+@   
 
 
 }
@@ -1044,7 +1090,13 @@ http://istics.net/stat/Correlations/
 \frame{
   \frametitle{Also scope for outliers}
   
-\includegraphics{StatisticalLiteracyCourse-coroutlier}
+<<coroutlier, fig = TRUE, echo = FALSE, results = hide>>=   
+x <- c(rnorm(20), 10)
+y <- c(rnorm(20), 10)
+
+plot(y~x, pch = 16, col = "red", cex = 2, main = "Correlation coefficient = ?", xlab = "x", ylab = "y")
+
+@
 
 }
 
